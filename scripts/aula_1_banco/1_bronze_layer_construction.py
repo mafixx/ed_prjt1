@@ -5,13 +5,14 @@ from sqlalchemy import text
 from datetime import datetime
 from sqlalchemy import create_engine
 from sqlalchemy.exc import SQLAlchemyError
+from pathlib import Path
 
 # -------------------------------
 # Variáveis de Configuração
 # -------------------------------
 # Carrega as variáveis de ambiente a partir do arquivo .env
-path_to_env = "scripts/aula_1_banco/.env"
-load_dotenv(dotenv_path=path_to_env, override=True)
+BASE_DIR = Path(__file__).resolve().parents[2]
+load_dotenv(BASE_DIR / ".env", override=True)
 
 # Mapeia nomes das tabelas de destino para os nomes dos arquivos CSV de origem.
 FILES = {

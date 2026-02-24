@@ -9,7 +9,7 @@ import os
 # Variáveis e Funções de Conexão
 # -------------------------------
 # Carrega as variáveis de ambiente a partir do arquivo .env
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parents[2]
 load_dotenv(BASE_DIR / ".env", override=True)
 
 
