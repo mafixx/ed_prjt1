@@ -16,3 +16,14 @@ __pycache__/
 
 # Logs
 *.log
+
+# Airflow
+aula_4_airflow/airflow.cfg
+aula_4_airflow/airflow.db
+aula_4_airflow/*.db
+aula_4_airflow/*.db-shm
+aula_4_airflow/*.db-wal
+
+# Airflow runtime files
+aula_4_airflow/logs/
+aula_4_airflow/simple_auth_manager_passwords.json.generated
