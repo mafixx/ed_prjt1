@@ -1,4 +1,4 @@
-CREATE TABLE oltp_paciente (
+CREATE TABLE IF NOT EXISTS oltp_paciente (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     sexo CHAR(1) CHECK (sexo IN ('M','F')),
@@ -7,7 +7,7 @@ CREATE TABLE oltp_paciente (
     estado CHAR(2)
 );
 
-CREATE TABLE oltp_medico (
+CREATE TABLE IF NOT EXISTS oltp_medico (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     especialidade VARCHAR(50),
@@ -15,14 +15,14 @@ CREATE TABLE oltp_medico (
     estado_crm CHAR(2)
 );
 
-CREATE TABLE oltp_clinica (
+CREATE TABLE IF NOT EXISTS oltp_clinica (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     cidade VARCHAR(100),
     estado CHAR(2)
 );
 
-CREATE TABLE oltp_consulta (
+CREATE TABLE IF NOT EXISTS oltp_consulta (
     id SERIAL PRIMARY KEY,
     paciente_id INT REFERENCES oltp_paciente(id),
     medico_id INT REFERENCES oltp_medico(id),
@@ -32,12 +32,12 @@ CREATE TABLE oltp_consulta (
     status VARCHAR(20) CHECK (status IN ('Agendada','Realizada','Cancelada'))
 );
 
-CREATE TABLE oltp_agenda (
+CREATE TABLE IF NOT EXISTS oltp_agenda (
     consulta_id INT PRIMARY KEY REFERENCES oltp_consulta(id),
     data_agendamento DATE NOT NULL
 );
 
-CREATE TABLE oltp_faturamento (
+CREATE TABLE IF NOT EXISTS oltp_faturamento (
     consulta_id INT PRIMARY KEY REFERENCES oltp_consulta(id),
     valor_pago NUMERIC(10,2),
     forma_pagamento VARCHAR(20) CHECK (forma_pagamento IN ('Dinheiro','Cartão Crédito','Cartão Débito','PIX','Convênio')),
