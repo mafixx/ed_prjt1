@@ -13,7 +13,7 @@ import custom_packages.plu_medical as plu_medical
 # Argumentos padrão aplicados a todas as tasks da DAG
 DEFAULT_ARGS = {
     'start_date': datetime(2025, 9, 26),   # Data inicial da DAG
-    'email': ["geovanyadc@gmail.com"],     # Email para notificações
+    'email': ["ph.romaguera@gmail.com"],     # Email para notificações
     'email_on_failure': True,              # Envia email em caso de falha
     'retries': 2,                          # Número de tentativas em caso de erro
     'on_failure_callback': plu_medical.print_erro,  # Função customizada para tratar falhas
