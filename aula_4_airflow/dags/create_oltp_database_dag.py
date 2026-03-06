@@ -35,14 +35,14 @@ def oltp_medallion_pipeline():
         task_id="create_oltp_structure",
         conn_id="postgres_oltp_conn",
         sql="create_table.sql",
-        autocommit=True,
+        autocommit=False, # Persiste no banco após todo o arquivo ser executado no banco
     )
 
     insert_oltp_data = SQLExecuteQueryOperator(
         task_id="insert_oltp_data",
         conn_id="postgres_oltp_conn",
         sql="insert_into.sql",
-        autocommit=True,
+        autocommit=False, # Persiste no banco após todo o arquivo ser executado no banco
     )
 
     end_pipeline = EmptyOperator(

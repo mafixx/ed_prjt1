@@ -13,7 +13,6 @@ DEFAULT_ARGS = {
 
 # --- CONFIGURAÇÃO ESPECÍFICA DE CAMINHOS ---
 # O Airflow JÁ ESTÁ configurado para procurar templates aqui:
-# template_searchpath = /home/geovany-cancio/airflow/plugins/custom_packages
 AIRFLOW_HOME = os.environ.get("AIRFLOW_HOME")
 MONITORED_DIR = os.path.join(AIRFLOW_HOME, "custom_packages")
 SQL_FILE_TO_MONITOR = 'query_to_run.sql' # Nome do arquivo que a DAG vai esperar
