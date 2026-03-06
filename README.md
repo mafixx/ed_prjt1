@@ -251,5 +251,4 @@ Possible extensions to this project:
 
 # 👨‍💻 Author
 
-Data Engineering Project\
-Synthetic Healthcare Pipeline
+Pedro Barbieri
