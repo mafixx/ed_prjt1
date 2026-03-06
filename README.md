@@ -1,113 +1,185 @@
-# 🧠 Synthetic Healthcare Data Pipeline (Medallion Architecture)
+# 🧠 Synthetic Healthcare Data Pipeline
 
-Projeto de engenharia de dados construído com arquitetura Medallion (Bronze → Silver → Gold) utilizando dados sintéticos do Synthea.
+### Medallion Architecture (Bronze → Silver → Gold)
 
-O pipeline realiza ingestão, transformação, validação e agregação de dados clínicos utilizando Python, Pandas e PostgreSQL.
+This project implements a **data engineering pipeline using the
+Medallion Architecture** to process synthetic healthcare data generated
+by **Synthea**.
 
-## 🏗️ Arquitetura do Projeto
+The pipeline performs **data ingestion, transformation, validation and
+analytical modeling** using Python, Pandas and PostgreSQL.
 
-![Arquitetura do Pipeline](docs/architecture_pipeline.png)
+------------------------------------------------------------------------
 
-## 🎯 Objetivo
+# 🏗️ Architecture
 
-Construir um pipeline ETL completo simulando um cenário real de engenharia de dados:
+![Pipeline Architecture](docs/architecture_pipeline.png)
 
-- Ingestão de dados clínicos em formato CSV
-- Organização em camadas Medallion
-- Transformações e validações de qualidade
-- Modelagem analítica (Gold Layer)
+The pipeline follows the **Medallion Architecture pattern**, separating
+data processing into three layers:
 
-## 🧰 Tecnologias
+CSV files (Synthea synthetic data)\
+↓\
+Bronze Layer --- Raw ingestion into PostgreSQL\
+↓\
+Silver Layer --- Data cleaning, normalization and enrichment\
+↓\
+Gold Layer --- Analytical tables optimized for business analysis
 
-- Python
-- Pandas
-- SQLAlchemy
-- PostgreSQL
-- Jupyter Notebook
-- Git & GitHub (workflow com branches)
+This structure improves:
 
-## 🧱 Arquitetura Medallion
+-   Data reliability
+-   Query performance
+-   Data governance
+-   Analytical usability
 
-### 🥉 Bronze Layer — Ingestão
+------------------------------------------------------------------------
+
+# 🎯 Project Objective
+
+Build a **realistic data engineering pipeline** simulating healthcare
+data processing using Medallion Architecture.
+
+The project includes:
+
+-   ingestion of clinical data from CSV
+-   structured data layering
+-   data quality checks
+-   analytical modeling
+
+------------------------------------------------------------------------
+
+# 🧰 Technologies
+
+The pipeline was built using the following stack:
+
+-   Python
+-   Pandas
+-   SQLAlchemy
+-   PostgreSQL
+-   Psycopg2
+-   Jupyter Notebook
+-   Git & GitHub
+
+------------------------------------------------------------------------
+
+# ⚙️ Engineering Highlights
+
+Key engineering decisions implemented in this project:
+
+-   Medallion Architecture (Bronze → Silver → Gold)
+-   High performance ingestion using PostgreSQL COPY
+-   Modular transformation scripts
+-   Data quality validation checks
+-   Analytical modeling with **One Big Table (OBT)**
+-   Clear separation between ingestion, transformation and analytics
+    layers
+
+------------------------------------------------------------------------
+
+# 🥉 Bronze Layer --- Data Ingestion
 
 Script:
 
-- `1_bronze_layer_construction.py`
+`1_bronze_layer_construction.py`
 
-Responsável por:
+Responsibilities:
 
-- Carregar CSVs do Synthea
-- Inserir dados brutos no PostgreSQL
+-   Load raw Synthea CSV datasets
+-   Insert raw data into PostgreSQL
 
-Tabelas:
+Tables created:
 
-- bronze_patients
-- bronze_encounters
-- bronze_conditions
+-   bronze_patients
+-   bronze_encounters
+-   bronze_conditions
 
----
+The Bronze layer stores **raw, unprocessed data** for traceability.
 
-### 🥈 Silver Layer — Limpeza e Padronização
+------------------------------------------------------------------------
 
-Script:
-
-- `2_silver_layer_construction.py`
-
-Transformações:
-
-- criação de full_name
-- cálculo de duration_hours
-- normalização de campos
-- checks de qualidade
-
-Tabelas:
-
-- silver_patients
-- silver_encounters
-- silver_conditions
-
----
-
-### 🥇 Gold Layer — Modelagem Analítica
+# 🥈 Silver Layer --- Data Cleaning & Standardization
 
 Script:
 
-- `3_gold_layer_construction.py`
+`2_silver_layer_construction.py`
 
-Saídas:
+Transformations applied:
 
-- gold_obt_encounters (One Big Table)
-- gold_patient_summary
-- gold_encounter_summary
+-   creation of `full_name`
+-   calculation of `duration_hours`
+-   normalization of fields
+-   data cleaning and preparation
 
-## ✅ Data Quality
+Tables created:
 
-Validações aplicadas:
+-   silver_patients
+-   silver_encounters
+-   silver_conditions
 
-- checagem de nulos em colunas críticas
-- validação de valores negativos
-- verificação de integridade antes da carga
+The Silver layer contains **clean and structured data ready for
+analytics**.
 
-Notebook:
+------------------------------------------------------------------------
 
-- `medical_data_verification.ipynb`
+# 🥇 Gold Layer --- Analytical Modeling
 
-## ▶️ Como executar
+Script:
 
-Clone o repositório:
+`3_gold_layer_construction.py`
 
-```bash
+Outputs:
+
+-   gold_obt_encounters
+-   gold_patient_summary
+-   gold_encounter_summary
+
+Gold tables provide **business-ready datasets** optimized for analytics
+and reporting.
+
+Example outputs include:
+
+-   One Big Table (OBT)
+-   patient-level aggregated metrics
+-   encounter summaries
+
+------------------------------------------------------------------------
+
+# ✅ Data Quality
+
+The project includes **data quality validation** before loading curated
+layers.
+
+Validations applied:
+
+-   null checks on critical fields
+-   validation of negative values
+-   integrity verification before load
+
+Notebook used:
+
+`medical_data_verification.ipynb`
+
+------------------------------------------------------------------------
+
+# ▶️ How to Run
+
+Clone the repository:
+
+``` bash
 git clone <repo>
 cd ed_prjt1
 ```
 
-Instale as dependências:
-```bash
+Install dependencies:
+
+``` bash
 pip install -r requirements.txt
 ```
 
-Configure as variáveis de ambiente (crie .env):
-```bash
+Configure environment variables (create `.env`):
+
+``` bash
 PG_USER=
 PG_PASS=
 PG_HOST=localhost
@@ -115,30 +187,69 @@ PG_PORT=5432
 PG_DB=
 ```
 
-Execute:
-```bash
+Run the pipeline:
+
+``` bash
 python scripts/aula_1_banco/1_bronze_layer_construction.py
 python scripts/aula_1_banco/2_silver_layer_construction.py
 python scripts/aula_1_banco/3_gold_layer_construction.py
 ```
 
+------------------------------------------------------------------------
 
----
+# 📁 Project Structure
 
-## 📂 8️⃣ Estrutura do projeto
+    ed_prjt1/
+    │
+    ├── data/
+    │
+    ├── scripts/
+    │   └── aula_1_banco/
+    │        ├── 1_bronze_layer_construction.py
+    │        ├── 2_silver_layer_construction.py
+    │        ├── 3_gold_layer_construction.py
+    │
+    ├── docs/
+    │    └── architecture_pipeline.png
+    │
+    ├── notebooks/
+    │    └── medical_data_verification.ipynb
+    │
+    ├── requirements.txt
+    │
+    └── README.md
 
-```md
-## 📁 Estrutura
+------------------------------------------------------------------------
 
-ed_prjt1/
-│
-├── data/
-├── scripts/
-│ └── aula_1_banco/
-│ ├── bronze
-│ ├── silver
-│ ├── gold
-│
-├── docs/
-├── README.md
-```
+# 📊 Dataset
+
+Synthetic healthcare data generated using:
+
+**Synthea**\
+https://synthea.mitre.org/
+
+The dataset simulates realistic patient medical records including:
+
+-   patients
+-   encounters
+-   medical conditions
+-   clinical attributes
+
+------------------------------------------------------------------------
+
+# 🚀 Future Improvements
+
+Possible extensions to this project:
+
+-   orchestration with **Apache Airflow**
+-   transformation layer using **dbt**
+-   containerization using **Docker**
+-   incremental loading strategies
+-   automated data quality tests
+
+------------------------------------------------------------------------
+
+# 👨‍💻 Author
+
+Data Engineering Project\
+Synthetic Healthcare Pipeline
